@@ -8,6 +8,7 @@ import {
 } from "../../shared/util/validators";
 import "./UpdatePlace.css";
 import { useForm } from "../../shared/hooks/form-hook";
+import Card from "../../shared/components/UIElements/Card";
 
 const DUMMY_Places = [
   {
@@ -25,7 +26,7 @@ const DUMMY_Places = [
   },
   {
     id: "p2",
-    title: "CN Tower",
+    title: "CNN Tower",
     description: "Highest site in Canada",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/9/96/Toronto_-_ON_-_Toronto_Harbourfront7.jpg",
@@ -59,20 +60,22 @@ const UpdatePlace = () => {
   const identifiedPlace = DUMMY_Places.find((p) => p.id === placeId);
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedPlace.title,
-          isValid: true,
+    if (identifiedPlace) {
+      setFormData(
+        {
+          title: {
+            value: identifiedPlace.title,
+            isValid: true,
+          },
+          description: {
+            value: identifiedPlace.description,
+            isValid: true,
+          },
         },
-        description: {
-          value: identifiedPlace.description,
-          isValid: true,
-        },
-      },
-      true
-    );
-    setIsLoading(false)
+        true
+      );
+    }
+    setIsLoading(false);
   }, [setFormData, identifiedPlace]);
 
   const placeUpdateSubmitHandler = (event) => {
@@ -83,7 +86,9 @@ const UpdatePlace = () => {
   if (!identifiedPlace) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <Card>
+          <h2>Could not find place!</h2>
+        </Card>
       </div>
     );
   }
@@ -93,7 +98,7 @@ const UpdatePlace = () => {
       <div className="center">
         <h2>Loading...</h2>
       </div>
-    )
+    );
   }
 
   return (
