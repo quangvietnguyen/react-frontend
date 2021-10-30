@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "./Map.css";
 import 'mapbox-gl/dist/mapbox-gl.css';
-mapboxgl.accessToken =
-  "pk.eyJ1IjoidmlldGN0aSIsImEiOiJja2twejJ0c2gwY2F2MnFvNW00enZ3NHl2In0.TVhNUtbDIMYHTZUSLmjpAQ";
+mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
 
 const Map = (props) => {
   const mapRef = useRef(null);
